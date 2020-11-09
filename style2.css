@@ -1,6 +1,5 @@
 *{
     font-family: 'Press Start 2P';
-    
 }
 main{
     width: 100%;
@@ -14,10 +13,8 @@ main{
     justify-content: space-evenly;
 }
 .intro button{
-    
     background-color: rgb(238, 58, 26);
     border: steelblue 9px solid;
-    
 }
 .theVault{
     height: 10rem;
@@ -36,9 +33,8 @@ main{
 }
 .player button {
     background-color: white;
-    //box-shadow: 0px 0px 14px 10px #0cfdbd,0px 0px 14px 10px #7c0cfd;
+    //box-shadow: 0px 0px 14px 10px #0CFDBD,0px 0px 14px 10px #7C0CFD;
     width: 6rem;
-    
 }
 .red{
     background-image: url(/images/charBtn.png);
@@ -59,7 +55,6 @@ main{
     height: 6rem;
     image-rendering: pixelated;
 }
-
 .modal-body img{
     height: 10rem;
     width: 10rem;
@@ -72,4 +67,47 @@ main{
     position: relative;
     left: 2rem;
     bottom: 7rem;
+    font-size: .9rem;
 }
+.fact {
+    font-size: .9rem;
+}
+.attack {
+    color: red;
+}
+.health {
+    color: green;
+}
+.special {
+    color: blue;
+}
+.goku-moveset li {
+    font-size: .7rem;
+}
+.luffy-moveset li {
+    font-size: .7rem;
+}
+.sailor-moveset li {
+    font-size: .7rem;
+}
+.azula-moveset li {
+    font-size: .7rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+Message Darys, Steven Sarria, Valentino Rodriguez
+
+
+
+
+
+
