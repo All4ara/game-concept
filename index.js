@@ -39,7 +39,7 @@ function animation() {
     context.imageSmoothingEnabled = false;
 
     context.drawImage(cellGames, 10,0,canvas.width-20,500)
-    context2.drawImage(goku,imageIndex, 448, 160, 224, 20, 0, 320, 448)
+    context2.drawImage(goku,imageIndex, 448, 160, 224, 100, -100, 320, 448)
     // context2.drawImage(azula, imageIndex2, 0, 30, 100, 350, 0, 130, 500);
 }
 setInterval(()=>{

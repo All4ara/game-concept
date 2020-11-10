@@ -6,6 +6,11 @@ main{
     height: 500px;
     background-color: rgb(69, 106, 226);
 }
+.title{
+    position: relative;
+    bottom: 25rem;
+
+}
 #selection {
     padding-top: 200px;
     margin: 120px 0;
@@ -29,7 +34,7 @@ main{
 .player{
     display: flex;
     justify-content: space-around;
-    border: steelblue 4px solid;
+    /* border: steelblue 4px solid; */
 }
 .player button {
     background-color: white;
@@ -93,7 +98,39 @@ main{
 .azula-moveset li {
     font-size: .7rem;
 }
-
+@media (max-width:375px){
+    main{
+        
+        width: 100%;
+        height: 100%;
+        background-color: rgb(69, 106, 226);
+    }
+    .title{
+        bottom: 50rem;
+    }
+    #selection {
+        padding-top: 100px;
+        padding-bottom: 100px;
+        margin: 0px 0px;
+    
+         flex-direction: column; 
+        
+    }
+    .intro button{
+        background-color: rgb(238, 58, 26);
+        border: steelblue 9px solid;
+        margin: 2rem 0;
+    }
+    .player img{
+        bottom: 1px;
+    }
+    .modal-body img{
+        height: 7rem;
+        width: 6rem;
+        
+    }
+    
+}
 
 
 
