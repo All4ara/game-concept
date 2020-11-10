@@ -1,10 +1,15 @@
+*{
+    font-family: 'Press Start 2P';
+}
+
 body{
     background-color: rgb(33, 33, 33);
     
 }
 div#buttons{
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    justify-content: space-around;
     
 }
 .atk1,
@@ -13,7 +18,7 @@ div#buttons{
 .atk4 {
     color: rgb(0, 255, 229);
     background-color: black;
-    font-size: 2rem;
+    font-size: 1rem;
     box-shadow: 0px 0px 14px 10px #0cfdbd;
     position: relative;
     bottom: 10rem;
@@ -29,5 +34,19 @@ div#buttons{
 #display{
     position: absolute;
     top: 10px;
-    left: 10;
+    left: 3px;
+}
+
+#timer {
+    width: 700px;
+    
+    
+}
+.timer{
+    position: absolute;
+    top: 1rem;
+    right: ;
+    text-align: center;
+    width: 730px;
+    font-family: 'Press Start 2P';
 }

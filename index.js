@@ -14,7 +14,7 @@ let azula = new Image();
 azula.src = 'images/azulaPre.png'
 
 
-canvas.width = window.innerWidth - 20;
+canvas.width = 710;
 canvas.height = 500;
 
 canvas2.width = window.innerWidth - 42;
