@@ -3,7 +3,7 @@
 let display = document.querySelector('#display');
 let context3 = display.getContext('2d');
 
-drawHealthbar(display, 18,10,200,20,20,100);
+drawHealthbar(display, 18,10,200,20,30,100);
 drawHealthbar(display, 500,10,200,20,70,100);
 
 function drawHealthbar(canvas,x,y,width,height,health,max_health){
