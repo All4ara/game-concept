@@ -292,7 +292,7 @@ let player1 = new Player(player1choice);
 let player2 = new Player(player2choice);
 let game = new Game(player1, player2);
 player1choice.setDestinationPos(150,130,2);
-player2choice.setDestinationPos(130,130,2);
+player2choice.setDestinationPos(190,130,2);
 let animate = () => {
     let id = window.requestAnimationFrame(animate);
     game.refreshFrame();
