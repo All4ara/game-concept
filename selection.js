@@ -1,4 +1,4 @@
-/* Start game function*/     
+/* Start game function*/
 let theSelector = document.querySelectorAll(".fight")
 let style = document.querySelector("style")   
 for (let btn of theSelector){

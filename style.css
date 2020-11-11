@@ -163,3 +163,9 @@ div#buttons{
     width: 730px;
     font-family: 'Press Start 2P';
 }
+
+.player{
+    position: absolute;
+    top: 80px;
+    left: 0;
+}

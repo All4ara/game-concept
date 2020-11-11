@@ -3,9 +3,6 @@
 let display = document.querySelector('#display');
 let context3 = display.getContext('2d');
 
-drawHealthbar(display, 18,10,200,20,30,100);
-drawHealthbar(display, 500,10,200,20,70,100);
-
 function drawHealthbar(canvas,x,y,width,height,health,max_health){
     if(health >= max_health){health=max_health;}
     if(health <= 0){alert('Finish Them!!!'); health=0;}
@@ -30,7 +27,7 @@ function drawHealthbar(canvas,x,y,width,height,health,max_health){
 
 let time = document.querySelector('.timer').innerText;
 
-let interval = setInterval(()=>{
+let intervalTime = setInterval(()=>{
     if(Number(time) > 1){
         document.querySelector('.timer').innerText -= 1;
         time-=1
@@ -39,6 +36,5 @@ let interval = setInterval(()=>{
     }
     
 }, 1000)
-console.log(time)
 
 
