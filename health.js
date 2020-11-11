@@ -40,3 +40,5 @@ let interval = setInterval(()=>{
     
 }, 1000)
 console.log(time)
+
+
