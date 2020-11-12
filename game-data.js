@@ -226,6 +226,7 @@ let luffy_stats = {
         'defaultAvail': 0
     },
     'boost': {
+        'details': 'Raises health',
         'avail': 1,
         'defaultAvail': -2
     },
@@ -249,10 +250,11 @@ let goku_stats = {
     },
     'special': {
         'strength': 240,
-        'avail': -1,
+        'avail': 1,
         'defaultAvail': 0
     },
     'boost': {
+        'details': 'Raises accuracy',
         'avail': 1,
         'defaultAvail': -1
     },
@@ -274,7 +276,7 @@ let sailormoon_stats = {
     'attack2': {
         'strength': 90,
         'avail': 1,
-        'defaultAvail': 1
+        'defaultAvail': -1
     },
     'special': {
         'strength': 170,
@@ -282,6 +284,7 @@ let sailormoon_stats = {
         'defaultAvail': 0
     },
     'boost': {
+        'details': 'Raises strength',
         'avail': 1,
         'defaultAvail': -1
     },
@@ -311,6 +314,7 @@ let azula_stats = {
         'defaultAvail': 0
     },
     'boost': {
+        'details': 'Raises strength',
         'avail': 1,
         'defaultAvail': -2
     },

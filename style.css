@@ -10,9 +10,8 @@ div#buttons{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    top: 470px;
+    top: 440px;
     position: absolute;
-   
     left: 2rem;
 }
 .atk1,
@@ -54,7 +53,7 @@ div#buttons{
 }
 .overlay2 {
     position: absolute;
-    left: 11rem;
+    left: 13rem;
     bottom: 3rem;
     height: 3.5rem;
     width: 8rem;
@@ -80,7 +79,7 @@ div#buttons{
 
 .overlay3 {
     position: absolute;
-    left: 21.7rem;
+    left: 25.7rem;
     bottom: 3rem;
     height: 3.5rem;
     width: 8rem;
@@ -105,7 +104,7 @@ div#buttons{
 }
 .overlay4 {
     position: absolute;
-    left: 33rem;
+    left: 39rem;
     bottom: 3rem;
     height: 3.5rem;
     width: 8rem;
@@ -168,4 +167,14 @@ div#buttons{
     position: absolute;
     top: 80px;
     left: 0;
+}
+
+.btn-disable
+{
+    cursor: not-allowed;
+    pointer-events: none;
+    /*Button disabled - CSS color class*/
+    color: #C0C0C0;
+    background-color: #FFFFFF;
+
 }
