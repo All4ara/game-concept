@@ -287,12 +287,12 @@ let characters = {
     'azula': new Character('azula', azula_moves, azula_stats, azula_sprite_info, 2)
 }
 let player1choice = characters.luffy;
-let player2choice = characters.sailormoon;
+let player2choice = characters.goku;
 let player1 = new Player(player1choice);
 let player2 = new Player(player2choice);
 let game = new Game(player1, player2);
 player1choice.setDestinationPos(150,130,2);
-player2choice.setDestinationPos(190,130,2);
+player2choice.setDestinationPos(190,-90,2);
 let animate = () => {
     let id = window.requestAnimationFrame(animate);
     game.refreshFrame();
