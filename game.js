@@ -383,6 +383,8 @@ for (let btn of theSelector){
         btn.onclick = startGame;
 }
 
+let game;
+
 function startGame(e) {
     style.innerHTML = `
         #starter-screen {
@@ -398,7 +400,7 @@ function startGame(e) {
     let player2 = new Player(player2choice);
     player1choice.setDestinationPos(140,120,2);
     player2choice.setDestinationPos(190,130,2);
-    let game = new Game(player1, player2);
+    game = new Game(player1, player2);
     let animate = () => {
     let id = window.requestAnimationFrame(animate);
     game.refreshFrame();
