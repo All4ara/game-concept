@@ -8,7 +8,7 @@ let context3 = display.getContext('2d');
 function drawHealthbar(canvas,x,y,width,height,health,max_health){
     if(health >= max_health){health=max_health;}
     if(health <= 0){
-        alert('Finish Them!!!'); 
+        alert('Game Over'); 
         health=0;
     }
 
