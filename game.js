@@ -46,7 +46,6 @@ class Game {
         if(this.currentState == 'idle') {
             this.gameStateAnimations.acting = 0;
             this.gameStateAnimations.receiving = 0;
-
         } else if (this.currentState == 'preattack') {
             this.gameStateAnimations.acting = 0;
             this.gameStateAnimations.receiving = 0;
@@ -78,6 +77,7 @@ class Game {
             if(this.receiving.stats.health <= 0) {
                 document.querySelector('#end').style.visibility = 'visible'
                 document.querySelector('.winner-name').innerText = this.acting.character.characterName
+                this.enterState(5);
             }            
             setTimeout(() => {
                 this.enterState(6);
