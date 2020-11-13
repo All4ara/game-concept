@@ -10,10 +10,10 @@ div#buttons{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    top: 470px;
+    top: 440px;
     position: absolute;
-   
     left: 2rem;
+    
 }
 .atk1,
 .atk2,
@@ -21,6 +21,10 @@ div#buttons{
 .atk4 {
     color: rgb(0, 0, 0);
     background-color: rgb(160, 160, 160);
+    background-image: url('images/msg-box.png');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     font-size: 1rem;
     margin-right: 5.3rem;
     padding: .4rem;
@@ -150,22 +154,70 @@ div#buttons{
     left: 48px;
 }
 
-#timer {
-    width: 700px;
-    
-    
-}
+
 .timer{
     position: absolute;
-    top: 1rem;
-    
+    top: 1.4rem;
+    left: .5rem;
+    font-size: 1rem;
     text-align: center;
     width: 800px;
     font-family: 'Press Start 2P';
+    -webkit-text-fill-color: rgb(255, 255, 255); /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgb(0, 0, 0);
 }
 
 .player{
     position: absolute;
     top: 80px;
     left: 0;
+}
+
+.btn-disable
+{
+    cursor: not-allowed;
+    pointer-events: none;
+    /*Button disabled - CSS color class*/
+    color: #C0C0C0;
+    background-color: #FFFFFF;
+    
+
+}
+#end{
+    position: fixed;
+    bottom: 0;
+    left: 600px;
+    margin: 3rem;
+    padding: 1rem;
+    background-image: url('images/msg-box.png');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 20rem;
+}
+.champ1{
+    width:2rem;
+    height: 2rem;
+    position: absolute;
+    top: 40px;
+    right: 30px;
+}
+.champ2{
+    width:2rem;
+    height: 2rem;
+    position: absolute;
+    top: 40px;
+    left: 30px;
+}
+.winner{
+    font-size: 1.3rem;
+    -webkit-text-fill-color: rgb(106, 255, 0); /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgb(0, 0, 0);
+}
+.winner-name {
+    -webkit-text-fill-color: rgb(77, 255, 0); /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgb(0, 0, 0);
 }

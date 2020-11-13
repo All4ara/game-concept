@@ -1,11 +1,16 @@
 
 // Health bar
+
 let display = document.querySelector('#display');
 let context3 = display.getContext('2d');
 
+
 function drawHealthbar(canvas,x,y,width,height,health,max_health){
     if(health >= max_health){health=max_health;}
-    if(health <= 0){alert('Finish Them!!!'); health=0;}
+    if(health <= 0){
+        alert('Finish Them!!!'); 
+        health=0;
+    }
 
     context3.fillStyle = '#000000';
     context3.fillRect(x,y,width,height);
@@ -25,16 +30,8 @@ function drawHealthbar(canvas,x,y,width,height,health,max_health){
 
 // Timer for Game
 
-let time = document.querySelector('.timer').innerText;
 
-let intervalTime = setInterval(()=>{
-    if(Number(time) > 1){
-        document.querySelector('.timer').innerText -= 1;
-        time-=1
-    } else if(time == 1){
-        document.querySelector('.timer').innerText = "Start";
-    }
-    
-}, 1000)
+
+
 
 

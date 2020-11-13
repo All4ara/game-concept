@@ -1,17 +1,16 @@
 *{
     font-family: 'Press Start 2P';
 }
-main{
-    width: 100%;
-    height: 500px;
-    background-color: rgb(69, 106, 226);
-}
+
 .title{
     position: relative;
-    bottom: 25rem;
+    bottom: 39rem;
 
 }
 #selection {
+    width: 100%;
+    height: 600px;
+    background-color: rgb(69, 106, 226);
     padding-top: 200px;
     margin: 120px 0;
     display: flex;
@@ -31,29 +30,30 @@ main{
     font-size: 1.2rem;
     padding-top: 2.5rem;
 }
-.player{
+.plyr{
     display: flex;
     justify-content: space-around;
+    height: 200px;
     /* border: steelblue 4px solid; */
 }
-.player button {
+.plyr button {
     background-color: white;
     /* box-shadow: 0px 0px 14px 10px #0CFDBD,0px 0px 14px 10px #7C0CFD; */
-    width: 6rem;
+    width: 8rem;
 }
 .red{
-    background-image: url(/images/charBtn.png);
+    background-image: url(images/charBtn.png);
     background-position: 0 0;
     background-repeat: no-repeat;
     background-size: cover;
 }
 .blue{
-    background-image: url(/images/charBtn.png);
+    background-image: url(images/charBtn.png);
     background-position: 0 0;
     background-repeat: no-repeat;
     background-size: cover;
 }
-.player img{
+.plyr img{
     position: relative;
     bottom: 10px;
     width: 5rem;
@@ -121,7 +121,7 @@ main{
         border: steelblue 9px solid;
         margin: 2rem 0;
     }
-    .player img{
+    .plyr img{
         bottom: 1px;
     }
     .modal-body img{

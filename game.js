@@ -20,7 +20,8 @@ class Game {
         this.playersAlive = true;
         this.loadBackground();
         this.loadCharacters();
-        this.pickStartingPlayer();       
+        this.pickStartingPlayer();
+        this.updateButtonInfo();       
     }
     loadBackground = () =>{
         this.backgroundImage.src = 'images/background.jpg';
@@ -44,12 +45,13 @@ class Game {
         if(this.currentState == 'idle') {
             this.gameStateAnimations.acting = 0;
             this.gameStateAnimations.receiving = 0;
+
         } else if (this.currentState == 'preattack') {
             this.gameStateAnimations.acting = 0;
             this.gameStateAnimations.receiving = 0;
-            console.log('pick move')
         } else if (this.currentState == 'attack') {
             let animationIndex = this.acting.moveToNum();
+            this.updateButtonClickable();
             if(this.receiving.receiveDamage(this.acting.turn(this.acting.moveChosen))) {
                 this.acting.character.animations[animationIndex].animationEnded = false;
                 this.gameStateAnimations.acting = animationIndex;
@@ -68,6 +70,7 @@ class Game {
         } else if (this.currentState == 'attacked') {
             this.gameStateAnimations.acting = 0;
             this.gameStateAnimations.receiving = 5;
+            this.updateButtonClickable();
             this.drawHealthBar();
             setTimeout(() => {
                 this.enterState(6);
@@ -78,6 +81,9 @@ class Game {
             let temp = this.acting;
             this.acting = this.receiving;
             this.receiving = temp;
+            this.drawHealthBar();
+            this.updateButtonInfo();
+            this.updateButtonClickable();
             setTimeout(() => {
                 console.log('recovered')
                 this.enterState(1);
@@ -102,9 +108,39 @@ class Game {
     }
     drawHealthBar = () => {
         context3.clearRect(0,0,display.width, display.height)
-        drawHealthbar(display, 18,10,200,20,(player1.stats.health/player1.stats.initHealth)*100,100);
-        drawHealthbar(display, 500,10,200,20,(player2.stats.health/player2.stats.initHealth)*100,100);
+        drawHealthbar(display, 18,10,200,20,(this.player1.stats.health/this.player1.stats.initHealth)*100,100);
+        drawHealthbar(display, 500,10,200,20,(this.player2.stats.health/this.player2.stats.initHealth)*100,100);
     }
+    updateButtonInfo = () => {
+        document.querySelector('#attack1').innerText = this.acting.character.moves['attack1'].name
+        document.querySelector('#attack1-strength').innerText = this.acting.stats.attack1.strength;
+        document.querySelector('#attack2').innerText = this.acting.character.moves['attack2'].name
+        document.querySelector('#attack2-strength').innerText = this.acting.stats.attack2.strength;
+        document.querySelector('#boost').innerText = this.acting.character.moves['boost'].name
+        document.querySelector('#boost-strength').innerText = this.acting.stats.boost.details;
+        document.querySelector('#special').innerText = this.acting.character.moves['special'].name
+        document.querySelector('#special-strength').innerText = this.acting.stats.special.strength;
+    }
+    updateButtonClickable = () => {
+        if(this.acting.stats.special.avail != 1) {
+            document.querySelector('.atk4').classList.add('btn-disable');
+        } else {
+            document.querySelector('.atk4').classList.remove('btn-disable');
+        }
+        if(this.acting.stats.attack2.avail != 1) {
+            document.querySelector('.atk3').classList.add('btn-disable');
+        } else {
+            document.querySelector('.atk3').classList.remove('btn-disable');
+        }
+        if(this.acting.stats.boost.avail != 1) {
+            document.querySelector('.atk2').classList.add('btn-disable');
+        } else {
+            document.querySelector('.atk2').classList.remove('btn-disable');
+        }
+    }
+
+
+
 }
 class Character {
     constructor(characterName, moves, stats, spriteInfo, playerNum) {
@@ -217,14 +253,33 @@ class Player {
             this.stats[move].avail = this.stats[move].defaultAvail;
             if(move === 'boost') {
                 this.stats.booster();
+                this.updateTurnCounter();
+            } else if (move == 'special') {
+                this.updateTurnCounter();
+                return this.stats[move].strength;
             } else {
+                this.updateTurnCounter();
                 return Math.random() < this.stats.accuracy ? this.stats[move].strength : 0;
             }
         }
-        else if (this.stats[move].avail != 1 && this.stats[move].defaultAvail != 0) {
-            this.stats[move].avail += 1;
-        }
+        // else if (this.stats[move].avail != 1 && this.stats[move].defaultAvail != 0) {
+            //     this.stats[move].avail += 1;
+            // }
+        
         return 0;
+    }
+    updateTurnCounter() {
+
+        let moves = ['boost', 'attack2']
+
+        for(let move of moves) {
+            console.log(this.stats[move].avail != 1, this.stats[move].defaultAvail != 0);
+            if(this.stats[move].avail != 1 && this.stats[move].defaultAvail != 0) {
+                this.stats[move].avail += 1;
+            }
+        }
+
+        
     }
     receiveDamage(num) {
         this.stats.health -= num;
@@ -250,62 +305,124 @@ class Player {
 }
 let goku_moves = {
     'idle': new Move('idle'),
-    'attack1': new Move('attack1', 110, 1),
-    'attack2': new Move('attack2', 120, 1),
-    'special': new Move('special', 130, 1),
-    'boost': new Move('boost', 160, 1),
+    'attack1': new Move('attack1'),
+    'attack2': new Move('attack2'),
+    'special': new Move('special'),
+    'boost': new Move('boost'),
     'defeat': new Move('defeat')
 };
 let luffy_moves = {
     'idle': new Move('idle'),
-    'attack1': new Move('attack1', 110, 1),
-    'attack2': new Move('attack2', 120, 1),
-    'special': new Move('special', 130, 1),
-    'boost': new Move('boost', 160, 1),
+    'attack1': new Move('Gum Gum Bazooka'),
+    'attack2': new Move('Gum Gum Sniper'),
+    'special': new Move('Gum Gum Gatling Gun'),
+    'boost': new Move('Gum Gum Balloon'),
     'defeat': new Move('defeat')
 };
 let sailormoon_moves = {
     'idle': new Move('idle'),
-    'attack1': new Move('attack1', 110, 1),
-    'attack2': new Move('attack2', 120, 1),
-    'special': new Move('special', 130, 1),
-    'boost': new Move('boost', 160, 1),
+    'attack1': new Move('Moon Kick'),
+    'attack2': new Move('Moon Tiara Action'),
+    'special': new Move('Rush Luna'),
+    'boost': new Move('Spin Hair'),
     'defeat': new Move('defeat')
 }
 let azula_moves = {
     'idle': new Move('idle'),
-    'attack1': new Move('attack1', 110, 1),
-    'attack2': new Move('attack2', 120, 1),
-    'special': new Move('special', 130, 1),
-    'boost': new Move('boost', 160, 1),
+    'attack1': new Move('attack1'),
+    'attack2': new Move('attack2'),
+    'special': new Move('special'),
+    'boost': new Move('boost'),
     'defeat': new Move('defeat')
 }
+// let charactersfff = {
+//     // 'luffy':  new Character('luffy', luffy_moves, luffy_stats,luffy_sprite_info, 1),
+//     'goku': new Character('goku', goku_moves, goku_stats, goku_sprite_info, 1),
+//     'sailormoon': new Character('sailormoon', sailormoon_moves, sailormoon_stats, sailormoon_sprite_info, 2)
+//     // 'azula': new Character('azula', azula_moves, azula_stats, azula_sprite_info, 2)
+// }
+
 let characters = {
-    'luffy':  new Character('luffy', luffy_moves, luffy_stats,luffy_sprite_info, 1),
-    'goku': new Character('goku', goku_moves, goku_stats, goku_sprite_info, 2),
-    'sailormoon': new Character('sailormoon', sailormoon_moves, sailormoon_stats, sailormoon_sprite_info, 2),
-    'azula': new Character('azula', azula_moves, azula_stats, azula_sprite_info, 2)
+    'luffy': {
+        'name': 'luffy',
+        'moves': luffy_moves,
+        'stats': luffy_stats,
+        'sprite': luffy_sprite_info,
+        'x1': 140,
+        'y1': 120,
+        's1': 2
+    },
+    'azula': {
+        'name': 'azula',
+        'moves': azula_moves,
+        'stats': azula_stats,
+        'sprite': azula_sprite_info
+
+    },
+    'goku': {
+        'name': 'goku',
+        'moves': goku_moves,
+        'stats': goku_stats,
+        'sprite': goku_sprite_info
+    }, 
+    'sailormoon': {
+        'name': 'sailormoon',
+        'moves': sailormoon_moves,
+        'stats': sailormoon_stats,
+        'sprite': sailormoon_sprite_info,
+        'x1': 190,
+        'y1': 130,
+        's1': 2
+    }
+    
 }
-let player1choice = characters.luffy;
-let player2choice = characters.goku;
-let player1 = new Player(player1choice);
-let player2 = new Player(player2choice);
-let game = new Game(player1, player2);
-player1choice.setDestinationPos(150,130,2);
-player2choice.setDestinationPos(190,-90,2);
-let animate = () => {
+
+let theSelector = document.querySelectorAll(".fight")
+let style = document.querySelector("style")   
+for (let btn of theSelector){
+        btn.onclick = startGame;
+}
+let game;
+function startGame(e) {
+    style.innerHTML = `
+        #starter-screen {
+            display: none;
+        }
+        .modal-backdrop.show {
+            display: none;
+        }`;
+        player1select = characters[`${e.target.id}`];
+        let player1character = new Character(player1select.name, player1select.moves, player1select.stats, player1select.sprite, 1);
+        let player2character = new Character(characters['sailormoon'].name, characters['sailormoon'].moves, characters['sailormoon'].stats, characters[`sailormoon`].sprite, 2)
+        let player1 = new Player(player1character);
+        let player2 = new Player(player2character);
+        player1character.setDestinationPos(player1select.x1,player1select.y1,player1select.s1);
+        player2character.setDestinationPos(190,130,2);
+    game = new Game(player1, player2);
+    let animate = () => {
     let id = window.requestAnimationFrame(animate);
     game.refreshFrame();
     game.drawBackground();
+    }
+    animate();
+    let interval = setInterval(() => {
+        game.acting.character.animate(game.gameStateAnimations.acting);
+        game.receiving.character.animate(game.gameStateAnimations.receiving);
+    }, uInterval);
+    let time = document.querySelector('.timer').innerText;
+    let intervalPlayerTurn = 1000;
+    let intervalTime = setInterval(()=>{
+        if(Number(time) > 1){
+            document.querySelector('.timer').innerText -= 1;
+            time-=1
+        } else if(time == 1){
+            document.querySelector('.timer').innerText = `${game.acting.character.characterName}'s turn`;
+            intervalPlayerTurn = 100;
+        }
+    }, intervalPlayerTurn)
 }
-animate();
-let interval = setInterval(() => {
-    game.acting.character.animate(game.gameStateAnimations.acting);
-    game.receiving.character.animate(game.gameStateAnimations.receiving);
-}, uInterval);
 
-/* Funcationable Buttons */
-let atk1 = document.querySelector(".atk1").innerText   
-let bst1 = document.querySelector(".atk2").innerText
-let atk2 = document.querySelector(".atk3").innerText
-let spc = document.querySelector(".atk4").innerText
+
+
+
+

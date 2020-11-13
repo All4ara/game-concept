@@ -5,48 +5,266 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canvas Game</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
+<style>
+    #game {
+        display: none;
+    }
+</style>
 <body>
-    <canvas id="background" width="800" height="500"></canvas>
-    <canvas id="display" width="710" height="120"></canvas>
-    <canvas id="player1" class="player" width="800" height="500"></canvas>
-    <canvas id="player2" class="player" width="800" height="500"></canvas>
-    <div id="timer "><h1 class="timer text-center">3</h1></div>
-    <div id="buttons">
-        <div id="atk1">
-            <button class="atk1">Attack1</button>
-            <div class="overlay1">
-                <div class="text1">Kamehameha<br><br><span class="attack">100</span></div>
-            </div>
+    <div id="starter-screen">
+        <div id="selection">
+          <div class="plyr">
+            <button type="button" class="red" data-toggle="modal" data-target="#exampleModalCentered1">
+              <img src="images/goku.png" alt="goku">
+            </button>
+          </div>
+          <div class="plyr">
+            <button type="button" class="red" data-toggle="modal" data-target="#exampleModalCentered2">
+              <img src="images/luffy.png" alt="luffy">
+            </button>
+          </div>
+          <div class="intro text-center">
+            <button type="button" class="theVault" data-toggle="modal" data-target="#exampleModalCentered5">
+              
+            </button>
+          </div>
+          <div class="plyr">
+            <button type="button" class="blue" data-toggle="modal" data-target="#exampleModalCentered3">
+              <img src="images/moon.png" alt="moon">
+            </button>
+          </div>
+          <div class="plyr">
+            <button type="button" class="blue" data-toggle="modal" data-target="#exampleModalCentered4">
+              <img src="images/azula.png" alt="azula">
+            </button>
+          </div>
         </div>
-        <div id="atk2">
-            <button class="atk2">Boost1</button>
-            <div class="overlay2">
-                <div class="text2">Super Saiyan 3<br><br><span class="health">Raise Accuracy</span></div>
+        <!-- modal setup -->
+        <div class="modal" id="exampleModalCentered1" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Goku AKA Kakerot</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <img src="images/goku.png" alt="goku">
+                <p>
+                  <strong>Type:</strong> Saiyan
+                  <br>
+                  <strong>Health:</strong> <span class='health'>850</span>
+                  <br>
+                  <strong>Attack:</strong> <span class='attack'>100-150</span>
+                  <br>
+                  <strong>Accuracy:</strong> Low
+                  <hr>
+                <h5 class='text-center'>Moves</h5>
+                <ul class='goku-moveset'>
+                  <li>Kamehamaha: <span class='attack'>90</span></li>
+                  <li>Dragon Fist: <span class='attack'>110</span></li>
+                  <li>Super Saiyan 3: Raises accuracy</li>
+                  <li><span class='special'>Spirit Bomb (Special)</span>: <span class='attack'>150</span></li>
+                </ul>
+                <hr>
+                <strong class='fact'>'Kakarot' is the Japanese term for 'carrot'. Many characters are named
+                  after fruits and vegetables in Dragon Ball Z. </strong>
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-primary fight" id="goku">Fight!!!</button>
+              </div>
             </div>
+          </div>
         </div>
-        <div id="atk3">
-            <button class="atk3">Attack2</button>
-            <div class="overlay3">
-                <div class="text3">Dragon Fist<br><br><span class="attack">150</span></div>
+        <div class="modal" id="exampleModalCentered2" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Monkey D. Luffy</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <img src="images/luffy.png" alt="luffy">
+                <p>
+                  <strong>Type:</strong> Devil Fruit User
+                  <br>
+                  <strong>Health:</strong> <span class='health'>950</span>
+                  <br>
+                  <strong>Attack:</strong> <span class='attack'>80-130</span>
+                  <br>
+                  <strong>Accuracy:</strong> Medium
+                  <hr>
+                <h5 class='text-center'>Moves</h5>
+                <ul class='luffy-moveset'>
+                  <li>Gum-Gum Bazooka: <span class='attack'>85</span></li>
+                  <li>Gum-Gum Sniper: <span class='attack'>100</span></li>
+                  <li>Gum-Gum Balloon: Luffy regains <span class='health'>health</span></li>
+                  <li><span class='special'>Gum-Gum Gatling Gun (Special)</span>: <span class='attack'>130</span></li>
+                </ul>
+                <hr>
+                <strong class='fact'>Due to consuming the Devil Fruit, Luffy can’t swim. Kind of ironic for a pirate.
+                </strong>
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-primary fight" id="luffy">Fight!!!</button>
+              </div>
             </div>
+          </div>
         </div>
-        <div id="atk4">
-            <button class="atk4">Special</button>
-            <div class="overlay4">
-                <div class="text4">Spirit Bomb<br><br><span class="attack">240</span></div>
+        <div class="modal" id="exampleModalCentered3" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Sailor Moon</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <img src="images/moon.png" alt="moon">
+                <p>
+                  <strong>Type:</strong> Princess of the Moon Kingdom
+                  <br>
+                  <strong>Health:</strong><span class='health'>
+                    1200 </span>
+                  <br>
+                  <strong>Attack:</strong><span class='attack'>70-120</span>
+                  <br>
+                  <strong>Accuracy:</strong> High
+                  <hr>
+                <h5 class='text-center'>Moves</h5>
+                <ul class='sailor-moveset'>
+                  <li>Moon Kick: <span class='attack'>70</span></li>
+                  <li>Moon Tiara Action: <span class='attack'>95</span></li>
+                  <li>Hair Spin: Raises attack but lowers accuracy</li>
+                  <li><span class='special'>Rush Luna (Special)</span>: <span class='attack'>120</span></li>
+                </ul>
+                <hr>
+                <strong class='fact'>Usagi Tsukino (or Sailor Moon) is the leader of the Sailor
+                  Soldiers. </strong>
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-primary fight" id="sailormoon">Fight!!!</button>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-     <!-- About/Credits -->
-    <div id="abt-credits">
-      <h2>About</h2>   
-    </div>
+        <div class="modal" id="exampleModalCentered4" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Azula</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <img src="images/azula.png" alt="azula">
+                <p>
+                  <strong>Type:</strong> Fire-Bender
+                  <br>
+                  <strong>Health:</strong><span class='health'>750</span>
+                  <br>
+                  <strong>Attack:</strong><span class='attack'>90-140</span>
+                  <br>
+                  <strong>Accuracy</strong> High
+                  <hr>
+                <ul class='azula-moveset'>
+                  <li>Fire Kick:<span class='attack'>90</span></li>
+                  <li>Fire Beam: <span class='attack'>110</span></li>
+                  <li>Fire Shield: Raises attack</li>
+                  <li><span class='special'>Fire Cannon (Special)</span>:<span class='attack'>140</span></li>
+                </ul>
+                <hr>
+                <strong class='fact'>Azula is the only known blue Fire-Bender and heir to the Fire
+                  Nation. </strong>
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-primary fight" id="azula">Fight!!!</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+            <h1 class="title text-center">The Vault</h1>
+            <h3 class="title text-center">SELECT A FIGHTER</h3>
+        </div>
+      </div>
 
+
+
+
+
+
+    <div id="game">
+        <canvas id="background" width="800" height="500"></canvas>
+        <canvas id="display" width="710" height="120"></canvas>
+        <canvas id="player1" class="player" width="800" height="500"></canvas>
+        <canvas id="player2" class="player" width="800" height="500"></canvas>
+        <div id="timer "><h1 class="timer text-center">3</h1></div>
+        <div id="buttons">
+            <div id="atk1">
+                <button class="atk1">Attack1</button>
+                <div class="overlay1">
+                    <div class="text1"><span id="attack1"></span><br><span class="attack" id="attack1-strength">100</span></div>
+                </div>
+            </div>
+            <div id="atk2">
+                <button class="atk2">Boost1</button>
+                <div class="overlay2">
+                    <div class="text2"><span id="boost"></span><br><span class="health" id="boost-strength">Raise Accuracy</span></div>
+                </div>
+            </div>
+            <div id="atk3">
+                <button class="atk3">Attack2</button>
+                <div class="overlay3">
+                    <div class="text3"><span id="attack2"></span><br><span class="attack" id="attack2-strength">150</span></div>
+                </div>
+            </div>
+            <div id="atk4">
+                <button class="atk4">Special</button>
+                <div class="overlay4">
+                    <div class="text4"><span id="special"></span>Spirit Bomb<br><span class="attack" id="special-strength">240</span></div>
+                </div>
+            </div>
+        </div>
+        <!-- TheEnd -->
+        <div class="text-center" id="end">
+            <h1 class="winner">Champion</h1>
+            <h3 class="winner-name">Luffy</h3>
+            <img class="champ1" src="images/champ.png" alt="Champ">
+            <img class="champ2" src="images/champ.png" alt="Champ">
+        </div>
+         <!-- About/Credits -->
+        <div id="abt-credits">
+          <h2>About</h2>   
+        </div>
+    </div>
 </body>
-
 <script src="health.js"></script>
 <script src="game-data.js"></script>
 <script src="game.js"></script>
+<script src="controllers.js"></script>
 </html>
