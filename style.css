@@ -185,9 +185,10 @@ div#buttons{
 
 }
 #end{
+    visibility: hidden;
     position: fixed;
-    bottom: 0;
-    left: 600px;
+    top: 100px;
+    left: 200px;
     margin: 3rem;
     padding: 1rem;
     background-image: url('images/msg-box.png');

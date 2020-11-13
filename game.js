@@ -19,9 +19,9 @@ class Game {
         this.backgroundImage = new Image();
         this.backgroundLoaded = false;
         this.playersAlive = true;
+        this.pickStartingPlayer();
         this.loadBackground();
         this.loadCharacters();
-        this.pickStartingPlayer();
         this.updateButtonInfo();       
     }
     loadBackground = () =>{
@@ -75,6 +75,10 @@ class Game {
             this.gameStateAnimations.receiving = 5;
             this.updateButtonClickable();
             this.drawHealthBar();
+            if(this.receiving.stats.health <= 0) {
+                document.querySelector('#end').style.visibility = 'visible'
+                document.querySelector('.winner-name').innerText = this.acting.character.characterName
+            }            
             setTimeout(() => {
                 this.enterState(6);
             }, ((this.receiving.character.animations[5].lastFrame / this.receiving.character.animations[5].frameWidth) * uInterval) + 2000);
