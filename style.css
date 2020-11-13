@@ -10,7 +10,7 @@ div#buttons{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    top: 440px;
+    top: 400px;
     position: absolute;
     left: 2rem;
     
