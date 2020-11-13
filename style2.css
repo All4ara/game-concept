@@ -127,6 +127,8 @@
     }
     .plyr img{
         bottom: 1px;
+        height: 70px;
+        width: 50px;
     }
     .plyr button {
         height: 6rem;
