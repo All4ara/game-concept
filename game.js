@@ -1,4 +1,5 @@
 const uInterval = 200;
+
 class Game {
     constructor(player1, player2){
         this.states = ['selection', 'idle', 'preattack', 'attack', 'attacked', 'defeat', 'recovery'];
@@ -57,6 +58,8 @@ class Game {
                 this.gameStateAnimations.acting = animationIndex;
                 this.gameStateAnimations.receiving = 0;
                 setTimeout(() => {
+                    this.acting.character.animations[animationIndex].reset();
+                    this.receiving.character.animations[animationIndex].reset();
                     this.enterState(4);
                 }, (this.acting.character.animations[animationIndex].lastFrame / this.acting.character.animations[animationIndex].frameWidth) * uInterval);
             } else {
@@ -241,6 +244,9 @@ class Animation {
             }
         }
     }
+    reset = () => {
+        this.currentFrame = this.firstFrame;
+    }
 }
 class Player {
     constructor(character) {
@@ -335,12 +341,6 @@ let azula_moves = {
     'boost': new Move('boost'),
     'defeat': new Move('defeat')
 }
-// let charactersfff = {
-//     // 'luffy':  new Character('luffy', luffy_moves, luffy_stats,luffy_sprite_info, 1),
-//     'goku': new Character('goku', goku_moves, goku_stats, goku_sprite_info, 1),
-//     'sailormoon': new Character('sailormoon', sailormoon_moves, sailormoon_stats, sailormoon_sprite_info, 2)
-//     // 'azula': new Character('azula', azula_moves, azula_stats, azula_sprite_info, 2)
-// }
 
 let characters = {
     'luffy': {
@@ -370,9 +370,9 @@ let characters = {
         'moves': sailormoon_moves,
         'stats': sailormoon_stats,
         'sprite': sailormoon_sprite_info,
-        'x1': 190,
-        'y1': 130,
-        's1': 2
+        'x2': 190,
+        'y2': 130,
+        's2': 2
     }
     
 }
@@ -393,13 +393,13 @@ function startGame(e) {
         .modal-backdrop.show {
             display: none;
         }`;
-    player1select = e.target.id;
-    let player1choice = new Character(characters[`${player1select}`].name, characters[`${player1select}`].moves, characters[`${player1select}`].stats, characters[`${player1select}`].sprite, 1);
-    let player2choice = new Character(characters['sailormoon'].name, characters['sailormoon'].moves, characters['sailormoon'].stats, characters[`sailormoon`].sprite, 2)
-    let player1 = new Player(player1choice);
-    let player2 = new Player(player2choice);
-    player1choice.setDestinationPos(140,120,2);
-    player2choice.setDestinationPos(190,130,2);
+    player1select = characters[`${e.target.id}`];
+    let player1character = new Character(player1select.name, player1select.moves, player1select.stats, player1select.sprite, 1);
+    let player2character = new Character(characters['sailormoon'].name, characters['sailormoon'].moves, characters['sailormoon'].stats, characters[`sailormoon`].sprite, 2)
+    let player1 = new Player(player1character);
+    let player2 = new Player(player2character);
+    player1character.setDestinationPos(player1select.x1,player1select.y1,player1select.s1);
+    player2character.setDestinationPos(190,130,2);
     game = new Game(player1, player2);
     let animate = () => {
     let id = window.requestAnimationFrame(animate);
@@ -419,7 +419,7 @@ function startGame(e) {
             time-=1
         } else if(time == 1){
             document.querySelector('.timer').innerText = `${game.acting.character.characterName}'s turn`;
-            intervalPlayerTurn = 100;
+            intervalPlayerTurn = 10;
         }
     }, intervalPlayerTurn)
 }

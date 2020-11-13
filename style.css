@@ -157,10 +157,12 @@ div#buttons{
 .timer{
     position: absolute;
     top: 1rem;
-    
     text-align: center;
     width: 800px;
     font-family: 'Press Start 2P';
+    -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 4px;
+    -webkit-text-stroke-color: black;
 }
 
 .player{
