@@ -180,3 +180,7 @@ div#buttons{
     background-color: #FFFFFF;
 
 }
+
+.modal-backdrop.show {
+    display: none !important;
+}

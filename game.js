@@ -380,7 +380,30 @@ let characters = {
 let theSelector = document.querySelectorAll(".fight")
 let style = document.querySelector("style")   
 for (let btn of theSelector){
-        btn.onclick = startGame;
+        btn.onclick = selectFighter;
+}
+
+document.querySelector('.theVault').onclick = selectFighter
+
+let player1select;
+let player2select;
+let player1selected = false;
+let player2selected = false;
+
+function selectFighter(e) {
+    if(player2selected) {
+        startGame(e)
+    } else {
+        document.querySelector(`.${e.target.id}-btn`).classList.add('btn-disable');
+        e.target.parentNode.parentNode.parentNode.parentNode.style.display = 'none';
+        if(!player1selected) {
+            player1select = characters[`${e.target.id}`];
+            player1selected = true;
+        } else {
+            player2select = characters[`${e.target.id}`];
+            player2selected = true;
+        }  
+    }
 }
 
 let game;
@@ -393,9 +416,9 @@ function startGame(e) {
         .modal-backdrop.show {
             display: none;
         }`;
-    player1select = characters[`${e.target.id}`];
+    
     let player1character = new Character(player1select.name, player1select.moves, player1select.stats, player1select.sprite, 1);
-    let player2character = new Character(characters['sailormoon'].name, characters['sailormoon'].moves, characters['sailormoon'].stats, characters[`sailormoon`].sprite, 2)
+    let player2character = new Character(player2select.name, player2select.moves, player2select.stats, player2select.sprite, 2)
     let player1 = new Player(player1character);
     let player2 = new Player(player2character);
     player1character.setDestinationPos(player1select.x1,player1select.y1,player1select.s1);
