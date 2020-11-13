@@ -10,7 +10,7 @@ div#buttons{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    top: 440px;
+    top: 400px;
     position: absolute;
     left: 2rem;
     
@@ -197,6 +197,25 @@ div#buttons{
     background-size: 100% 100%;
     width: 20rem;
 }
+#end button {
+    background-image: url('images/msg-box.png');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+#end a{
+    -webkit-text-fill-color: rgb(0, 195, 255); /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+#end a:hover {
+    -webkit-text-fill-color: rgb(0, 60, 255); /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: rgb(0, 0, 0);
+}
 .champ1{
     width:2rem;
     height: 2rem;
@@ -214,12 +233,12 @@ div#buttons{
 .winner{
     font-size: 1.3rem;
     -webkit-text-fill-color: rgb(106, 255, 0); /* Will override color (regardless of order) */
-    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-width: 1.5px;
     -webkit-text-stroke-color: rgb(0, 0, 0);
 }
 .winner-name {
     -webkit-text-fill-color: rgb(77, 255, 0); /* Will override color (regardless of order) */
-    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-width: 1.5px;
     -webkit-text-stroke-color: rgb(0, 0, 0);
 }
 
