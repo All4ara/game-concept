@@ -245,3 +245,51 @@ div#buttons{
 .modal-backdrop.show {
     display: none !important;
 }
+
+.abt-header h2{
+    font-size: 30px;
+    padding-top: 20px;
+    text-align: center;
+    top: -80px;
+    width: 552px;
+    height: 80px;
+    margin: auto;
+background: transparent url(https://i.imgur.com/A4wyuIG.png) top no-repeat;
+}
+
+
+.abt-body{
+ 
+    width: 552px;
+    background: transparent url(https://i.imgur.com/EV7Fckb.png) repeat-y;
+    height: 500px;
+    display: block;
+    text-align: center;
+    margin: auto;
+  
+}
+
+.abt-body p{
+    font-size: 12px;
+    line-height: 1.5em;
+    letter-spacing: 2px;
+    text-align: justify;
+    padding-left: 10px;
+    padding-right: 10px;
+    
+}
+
+.abt-footer{
+   background: transparent url('https://i.imgur.com/A4wyuIG.png')0 -75px no-repeat;
+   margin: auto;
+   width: 552px;
+   text-align: center;
+   height: 80px;
+   margin-top:-.6px;
+}
+
+.abt-body h2{
+    font-size: 30px;
+
+    
+}
