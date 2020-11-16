@@ -1,51 +1,51 @@
 let goku_sprite_info = {
     'animations': {
         'idle': {
-            'frameWidth': 160,
-            'frameHeight': 224,
+            'frameWidth': 800,
+            'frameHeight': 450,
             'yIndex': 0,
             'firstFrame': 0,
-            'lastFrame': (160 * 9),
+            'lastFrame': (800 * 6),
             'loop': false
         },
         'attack1': {
-            'frameWidth': 160,
-            'frameHeight': 224,
-            'yIndex': 224,
+            'frameWidth': 800,
+            'frameHeight': 450,
+            'yIndex': 900,
             'firstFrame': 0,
-            'lastFrame': (160 * 6),
+            'lastFrame': (800 * 9),
             'loop': false
         },
         'attack2': {
-            'frameWidth': 160,
-            'frameHeight': 224,
-            'yIndex': 448,
+            'frameWidth': 800,
+            'frameHeight': 450,
+            'yIndex': 2250,
             'firstFrame': 0,
-            'lastFrame': (160 * 8),
+            'lastFrame': (800 * 5),
             'loop': false
         },
         'special': {
-            'frameWidth': 160,
-            'frameHeight': 224,
-            'yIndex': 672,
+            'frameWidth': 800,
+            'frameHeight': 450,
+            'yIndex': 1350,
             'firstFrame': 0,
-            'lastFrame': (160 * 5),
+            'lastFrame': (800 * 10),
             'loop': false
         },
         'boost': {
-            'frameWidth': 160,
-            'frameHeight': 224,
-            'yIndex': 896,
+            'frameWidth': 800,
+            'frameHeight': 450,
+            'yIndex': 1800,
             'firstFrame': 0,
-            'lastFrame': (160 * 9),
+            'lastFrame': (800 * 6),
             'loop': false
         },
         'defeat': {
-            'frameWidth': 160,
-            'frameHeight': 224,
-            'yIndex': 1120,
+            'frameWidth': 800,
+            'frameHeight': 450,
+            'yIndex': 450,
             'firstFrame': 0,
-            'lastFrame': (160 * 2),
+            'lastFrame': (800 * 11),
             'loop': false
         }
     }
@@ -53,51 +53,51 @@ let goku_sprite_info = {
 let luffy_sprite_info = {
     'animations': {
         'idle': {
-            'frameWidth': 160,
-            'frameHeight': 80,
+            'frameWidth': 800,
+            'frameHeight': 450,
             'yIndex': 0,
             'firstFrame': 0,
-            'lastFrame': (160 * 5),
+            'lastFrame': (2400),
             'loop': true
         },
         'attack1': {
-            'frameWidth': 160,
-            'frameHeight': 80,
-            'yIndex': 80,
+            'frameWidth': 800,
+            'frameHeight': 450,
+            'yIndex': 450,
             'firstFrame': 0,
-            'lastFrame': (160 * 7),
+            'lastFrame': (7200),
             'loop': false
         },
         'attack2': {
-            'frameWidth': 160,
-            'frameHeight': 80,
-            'yIndex': 160,
+            'frameWidth': 800,
+            'frameHeight': 450,
+            'yIndex': 1800,
             'firstFrame': 0,
-            'lastFrame': (160 * 7),
+            'lastFrame': (11200),
             'loop': false
         },
         'special': {
-            'frameWidth': 160,
-            'frameHeight': 80,
-            'yIndex': 240,
+            'frameWidth': 800,
+            'frameHeight': 450,
+            'yIndex': 2250,
             'firstFrame': 0,
-            'lastFrame': (160 * 5),
+            'lastFrame': 13600,
             'loop': false
         },
         'boost': {
-            'frameWidth': 160,
-            'frameHeight': 80,
-            'yIndex': 320,
+            'frameWidth': 800,
+            'frameHeight': 450,
+            'yIndex': 1350,
             'firstFrame': 0,
-            'lastFrame': (160 * 6),
+            'lastFrame': (4800),
             'loop': false
         },
         'defeat': {
-            'frameWidth': 160,
-            'frameHeight': 80,
-            'yIndex': 400,
+            'frameWidth': 800,
+            'frameHeight': 450,
+            'yIndex': 900,
             'firstFrame': 0,
-            'lastFrame': (160 * 5),
+            'lastFrame': (4800),
             'loop': false
         }
     }

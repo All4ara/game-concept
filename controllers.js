@@ -7,24 +7,24 @@ let spc = document.querySelector(".atk4")
 
 atk1.onclick = (event) => {
     console.log('click')
-    game.acting.chooseMove('attack1');
+    game.actingPlayer.chooseMove('attack1');
     game.enterState(3);
 }
 
 bst1.onclick = (event) => {
     console.log('click')
-    game.acting.chooseMove('boost');
+    game.actingPlayer.chooseMove('boost');
     game.enterState(3);
 }
 
 atk2.onclick = (event) => {
     console.log('click')
-    game.acting.chooseMove('attack2');
+    game.actingPlayer.chooseMove('attack2');
     game.enterState(3);
 }
 
 spc.onclick = (event) => {
     console.log('click')
-    game.acting.chooseMove('special');
+    game.actingPlayer.chooseMove('special');
     game.enterState(3);
 }

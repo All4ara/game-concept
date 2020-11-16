@@ -8,11 +8,11 @@ class Game {
         this.player2 = player2
         this.character1 = player1.character
         this.character2 = player2.character
-        this.acting;
-        this.receiving;
+        this.actingPlayer;
+        this.receivingPlayer;
         this.gameStateAnimations = {
-            'acting': 0,
-            'receiving': 0
+            'actingPlayer': 0,
+            'receivingPlayer': 0
         }
         this.canvas = document.querySelector('#background');
         this.context = this.canvas.getContext('2d');
@@ -44,60 +44,62 @@ class Game {
     }
     cycle = () => {
         if(this.currentState == 'idle') {
-            this.gameStateAnimations.acting = 0;
-            this.gameStateAnimations.receiving = 0;
+            this.gameStateAnimations.actingPlayer = 0;
+            this.gameStateAnimations.receivingPlayer = 0;
         } else if (this.currentState == 'preattack') {
-            this.gameStateAnimations.acting = 0;
-            this.gameStateAnimations.receiving = 0;
+            this.gameStateAnimations.actingPlayer = 0;
+            this.gameStateAnimations.receivingPlayer = 0;
         } else if (this.currentState == 'attack') {
-            let animationIndex = this.acting.moveToNum();
+            let animationIndex = this.actingPlayer.formatMoveToNum();
             this.updateButtonClickable();
-            if(this.receiving.receiveDamage(this.acting.turn(this.acting.moveChosen))) {
-                this.acting.character.animations[animationIndex].animationEnded = false;
-                this.gameStateAnimations.acting = animationIndex;
-                this.gameStateAnimations.receiving = 0;
+            if(this.receivingPlayer.receiveDamage(this.actingPlayer.turn(this.actingPlayer.moveChosen))) {
+                console.log('player hit ###')
+                this.actingPlayer.character.animations[animationIndex].animationEnded = false;
+                this.gameStateAnimations.actingPlayer = animationIndex;
+                this.gameStateAnimations.receivingPlayer = 0;
                 setTimeout(() => {
-                    this.acting.character.animations[animationIndex].reset();
-                    this.receiving.character.animations[animationIndex].reset();
+                    this.actingPlayer.character.animations[animationIndex].reset();
+                    this.receivingPlayer.character.animations[animationIndex].reset();
+                    console.log('animation reset ###');
                     this.enterState(4);
-                }, (this.acting.character.animations[animationIndex].lastFrame / this.acting.character.animations[animationIndex].frameWidth) * uInterval);
+                }, (this.actingPlayer.character.animations[animationIndex].lastFrame / this.actingPlayer.character.animations[animationIndex].frameWidth) * uInterval);
             } else {
-                this.acting.character.animations[animationIndex].animationEnded = false;
-                this.gameStateAnimations.acting = animationIndex;
-                this.gameStateAnimations.receiving = 0;
+                this.actingPlayer.character.animations[animationIndex].animationEnded = false;
+                this.gameStateAnimations.actingPlayer = animationIndex;
+                this.gameStateAnimations.receivingPlayer = 0;
                 setTimeout(() => {
                     this.enterState(6);
-                }, (this.acting.character.animations[animationIndex].lastFrame / this.acting.character.animations[animationIndex].frameWidth) * uInterval);
+                }, (this.actingPlayer.character.animations[animationIndex].lastFrame / this.actingPlayer.character.animations[animationIndex].frameWidth) * uInterval);
             }
         } else if (this.currentState == 'attacked') {
-            this.gameStateAnimations.acting = 0;
-            this.gameStateAnimations.receiving = 5;
+            this.gameStateAnimations.actingPlayer = 0;
+            this.gameStateAnimations.receivingPlayer = 5;
             this.updateButtonClickable();
             this.drawHealthBar();
-            if(this.receiving.stats.health <= 0) {
+            if(this.receivingPlayer.stats.health <= 0) {
                 document.querySelector('#end').style.visibility = 'visible'
-                document.querySelector('.winner-name').innerText = this.acting.character.characterName
+                document.querySelector('.winner-name').innerText = this.actingPlayer.character.characterName
                 this.enterState(5);
             }            
             setTimeout(() => {
                 this.enterState(6);
-            }, ((this.receiving.character.animations[5].lastFrame / this.receiving.character.animations[5].frameWidth) * uInterval) + 2000);
+            }, ((this.receivingPlayer.character.animations[5].lastFrame / this.receivingPlayer.character.animations[5].frameWidth) * uInterval) + 2000);
         } else if (this.currentState == 'recovery') {
-            this.gameStateAnimations.acting = 0;
-            this.gameStateAnimations.receiving = 0;
-            let temp = this.acting;
-            this.acting = this.receiving;
-            this.receiving = temp;
+            this.gameStateAnimations.actingPlayer = 0;
+            this.gameStateAnimations.receivingPlayer = 0;
+            let temp = this.actingPlayer;
+            this.actingPlayer = this.receivingPlayer;
+            this.receivingPlayer = temp;
             this.drawHealthBar();
             this.updateButtonInfo();
             this.updateButtonClickable();
             setTimeout(() => {
                 console.log('recovered')
                 this.enterState(1);
-            }, 2000)
+            }, 1000)
         } else if (this.currentState == 'defeat') {
-            this.gameStateAnimations.acting = 0;
-            this.gameStateAnimations.receiving = 5;
+            this.gameStateAnimations.actingPlayer = 0;
+            this.gameStateAnimations.receivingPlayer = 5;
         }
     }
     enterState = (state) => {
@@ -106,11 +108,11 @@ class Game {
     }
     pickStartingPlayer = () => {
         let num = Math.ceil(Math.random() * 2)
-        this.acting = this[`player${num}`];
+        this.actingPlayer = this[`player${num}`];
         if (num == 1) {
-            this.receiving = this.player2;
+            this.receivingPlayer = this.player2;
         } else {
-            this.receiving = this.player1;
+            this.receivingPlayer = this.player1;
         }
     }
     drawHealthBar = () => {
@@ -119,27 +121,27 @@ class Game {
         drawHealthbar(display, 500,10,200,20,(this.player2.stats.health/this.player2.stats.initHealth)*100,100);
     }
     updateButtonInfo = () => {
-        document.querySelector('#attack1').innerText = this.acting.character.moves['attack1'].name
-        document.querySelector('#attack1-strength').innerText = this.acting.stats.attack1.strength;
-        document.querySelector('#attack2').innerText = this.acting.character.moves['attack2'].name
-        document.querySelector('#attack2-strength').innerText = this.acting.stats.attack2.strength;
-        document.querySelector('#boost').innerText = this.acting.character.moves['boost'].name
-        document.querySelector('#boost-strength').innerText = this.acting.stats.boost.details;
-        document.querySelector('#special').innerText = this.acting.character.moves['special'].name
-        document.querySelector('#special-strength').innerText = this.acting.stats.special.strength;
+        document.querySelector('#attack1').innerText = this.actingPlayer.character.moves['attack1'].name
+        document.querySelector('#attack1-strength').innerText = this.actingPlayer.stats.attack1.strength;
+        document.querySelector('#attack2').innerText = this.actingPlayer.character.moves['attack2'].name
+        document.querySelector('#attack2-strength').innerText = this.actingPlayer.stats.attack2.strength;
+        document.querySelector('#boost').innerText = this.actingPlayer.character.moves['boost'].name
+        document.querySelector('#boost-strength').innerText = this.actingPlayer.stats.boost.details;
+        document.querySelector('#special').innerText = this.actingPlayer.character.moves['special'].name
+        document.querySelector('#special-strength').innerText = this.actingPlayer.stats.special.strength;
     }
     updateButtonClickable = () => {
-        if(this.acting.stats.special.avail != 1) {
+        if(this.actingPlayer.stats.special.avail != 1) {
             document.querySelector('.atk4').classList.add('btn-disable');
         } else {
             document.querySelector('.atk4').classList.remove('btn-disable');
         }
-        if(this.acting.stats.attack2.avail != 1) {
+        if(this.actingPlayer.stats.attack2.avail != 1) {
             document.querySelector('.atk3').classList.add('btn-disable');
         } else {
             document.querySelector('.atk3').classList.remove('btn-disable');
         }
-        if(this.acting.stats.boost.avail != 1) {
+        if(this.actingPlayer.stats.boost.avail != 1) {
             document.querySelector('.atk2').classList.add('btn-disable');
         } else {
             document.querySelector('.atk2').classList.remove('btn-disable');
@@ -232,18 +234,19 @@ class Animation {
         this.lastFrame = lastFrame;
         this.animationEnded = false;
     }
-    play = (num = 0) => {
+    play = () => {
         if(this.loop) {
             if(this.currentFrame < this.lastFrame) {
                 this.currentFrame += this.frameWidth;
+                console.log('frame: ' + this.currentFrame);
             } else {
                 this.currentFrame = this.firstFrame;
             }
         } else {
             if(this.currentFrame < this.lastFrame && !this.animationEnded) {
                 this.currentFrame += this.frameWidth;
+                console.log('frame: ' + this.currentFrame);
             } else {
-                //this.currentFrame = this.firstFrame;
                 this.animationEnded = true;
             }
         }
@@ -272,9 +275,7 @@ class Player {
                 return Math.random() < this.stats.accuracy ? this.stats[move].strength : 0;
             }
         }
-        // else if (this.stats[move].avail != 1 && this.stats[move].defaultAvail != 0) {
-            //     this.stats[move].avail += 1;
-            // }
+        
         
         return 0;
     }
@@ -298,7 +299,7 @@ class Player {
     chooseMove(move) {
         this.moveChosen = move;
     }
-    moveToNum() {
+    formatMoveToNum() {
         switch(this.moveChosen) {
             case 'attack1':
                 return 1;
@@ -352,9 +353,9 @@ let characters = {
         'moves': luffy_moves,
         'stats': luffy_stats,
         'sprite': luffy_sprite_info,
-        'x1': 140,
-        'y1': 120,
-        's1': 2
+        'x1': 0,
+        'y1': 0,
+        's1': 1
     },
     'azula': {
         'name': 'azula',
@@ -426,7 +427,7 @@ function startGame(e) {
     let player1 = new Player(player1character);
     let player2 = new Player(player2character);
     player1character.setDestinationPos(player1select.x1,player1select.y1,player1select.s1);
-    player2character.setDestinationPos(190,130,2);
+    player2character.setDestinationPos(0,0,1);
     game = new Game(player1, player2);
     let animate = () => {
     let id = window.requestAnimationFrame(animate);
@@ -435,8 +436,8 @@ function startGame(e) {
     }
     animate();
     let interval = setInterval(() => {
-        game.acting.character.animate(game.gameStateAnimations.acting);
-        game.receiving.character.animate(game.gameStateAnimations.receiving);
+        game.actingPlayer.character.animate(game.gameStateAnimations.actingPlayer);
+        game.receivingPlayer.character.animate(game.gameStateAnimations.receivingPlayer);
     }, uInterval);
     let time = document.querySelector('.timer').innerText;
     let intervalPlayerTurn = 1000;
@@ -445,7 +446,8 @@ function startGame(e) {
             document.querySelector('.timer').innerText -= 1;
             time-=1
         } else if(time == 1){
-            document.querySelector('.timer').innerText = `${game.acting.character.characterName}'s turn`;
+            document.querySelector('.timer').innerText = `${game.actingPlayer
+    .character.characterName}'s turn`;
             intervalPlayerTurn = 10;
         }
     }, intervalPlayerTurn)
