@@ -209,7 +209,7 @@ let azula_sprite_info = {
 let luffy_stats = {
     'initHealth': 950,
     'health': 950,
-    'accuracy': 0.85,
+    'accuracy': 0.8,
     'attack1': {
         'strength': 110,
         'avail': 1,
@@ -237,19 +237,19 @@ let luffy_stats = {
 let goku_stats = {
     'initHealth': 850,
     'health': 850,
-    'accuracy': 0.7,
+    'accuracy': 0.75,
     'attack1': {
-        'strength': 100,
+        'strength': 120,
         'avail': 1, 
         'defaultAvail': 1
     },
     'attack2': {
-        'strength': 150,
+        'strength': 170,
         'avail': 1,
         'defaultAvail': -1
     },
     'special': {
-        'strength': 240,
+        'strength': 270,
         'avail': 1,
         'defaultAvail': 0
     },
@@ -265,8 +265,8 @@ let goku_stats = {
     }
 }
 let sailormoon_stats = {
-    'initHealth': 1200,
-    'health': 1200,
+    'initHealth': 1100,
+    'health': 1100,
     'accuracy': 0.9,
     'attack1': {
         'strength': 75,
