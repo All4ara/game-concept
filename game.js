@@ -46,35 +46,43 @@ class Game {
         if(this.currentState == 'idle') {
             this.gameStateAnimations.actingPlayer = 0;
             this.gameStateAnimations.receivingPlayer = 0;
+            this.enableAllButtons();
         } else if (this.currentState == 'preattack') {
             this.gameStateAnimations.actingPlayer = 0;
             this.gameStateAnimations.receivingPlayer = 0;
         } else if (this.currentState == 'attack') {
             let animationIndex = this.actingPlayer.formatMoveToNum();
-            this.updateButtonClickable();
+            this.updateButtonClickableOnTurn();
+            this.disableAllButtons();
             if(this.receivingPlayer.receiveDamage(this.actingPlayer.turn(this.actingPlayer.moveChosen))) {
-                console.log('player hit ###')
                 this.actingPlayer.character.animations[animationIndex].animationEnded = false;
                 this.gameStateAnimations.actingPlayer = animationIndex;
                 this.gameStateAnimations.receivingPlayer = 0;
                 setTimeout(() => {
                     this.actingPlayer.character.animations[animationIndex].reset();
                     this.receivingPlayer.character.animations[animationIndex].reset();
-                    console.log('animation reset ###');
                     this.enterState(4);
                 }, (this.actingPlayer.character.animations[animationIndex].lastFrame / this.actingPlayer.character.animations[animationIndex].frameWidth) * uInterval);
             } else {
                 this.actingPlayer.character.animations[animationIndex].animationEnded = false;
                 this.gameStateAnimations.actingPlayer = animationIndex;
                 this.gameStateAnimations.receivingPlayer = 0;
-                setTimeout(() => {
-                    this.enterState(6);
-                }, (this.actingPlayer.character.animations[animationIndex].lastFrame / this.actingPlayer.character.animations[animationIndex].frameWidth) * uInterval);
+                setTimeout(()=>{
+                    console.log(this.actingPlayer.moveChosen);
+                    if(this.actingPlayer.formatMoveToNum() != 4) {
+                        document.querySelector('#miss').style.display = 'block';
+                    }
+                    setTimeout(() => {
+                        document.querySelector('#miss').style.display = 'none';
+                        this.enterState(6);
+                    }, (this.actingPlayer.character.animations[animationIndex].lastFrame / this.actingPlayer.character.animations[animationIndex].frameWidth) * uInterval);
+                },2000)
             }
         } else if (this.currentState == 'attacked') {
             this.gameStateAnimations.actingPlayer = 0;
             this.gameStateAnimations.receivingPlayer = 5;
-            this.updateButtonClickable();
+            this.updateButtonClickableOnTurn();
+            this.disableAllButtons();
             this.drawHealthBar();
             if(this.receivingPlayer.stats.health <= 0) {
                 document.querySelector('#end').style.visibility = 'visible'
@@ -92,9 +100,9 @@ class Game {
             this.receivingPlayer = temp;
             this.drawHealthBar();
             this.updateButtonInfo();
-            this.updateButtonClickable();
+            this.updateButtonClickableOnTurn();
+            this.disableAllButtons();
             setTimeout(() => {
-                console.log('recovered')
                 this.enterState(1);
             }, 1000)
         } else if (this.currentState == 'defeat') {
@@ -130,7 +138,7 @@ class Game {
         document.querySelector('#special').innerText = this.actingPlayer.character.moves['special'].name
         document.querySelector('#special-strength').innerText = this.actingPlayer.stats.special.strength;
     }
-    updateButtonClickable = () => {
+    updateButtonClickableOnTurn = () => {
         if(this.actingPlayer.stats.special.avail != 1) {
             document.querySelector('.atk4').classList.add('btn-disable');
         } else {
@@ -147,6 +155,18 @@ class Game {
             document.querySelector('.atk2').classList.remove('btn-disable');
         }
     }
+    disableAllButtons = () => {
+        document.querySelector('.atk4').classList.add('btn-disable');
+        document.querySelector('.atk3').classList.add('btn-disable');
+        document.querySelector('.atk2').classList.add('btn-disable');
+        document.querySelector('.atk1').classList.add('btn-disable');
+    }
+    enableAllButtons = () => {
+        document.querySelector('.atk4').classList.remove('btn-disable');
+        document.querySelector('.atk3').classList.remove('btn-disable');
+        document.querySelector('.atk2').classList.remove('btn-disable');
+        document.querySelector('.atk1').classList.remove('btn-disable');
+}
 
 
 
@@ -238,14 +258,12 @@ class Animation {
         if(this.loop) {
             if(this.currentFrame < this.lastFrame) {
                 this.currentFrame += this.frameWidth;
-                console.log('frame: ' + this.currentFrame);
             } else {
                 this.currentFrame = this.firstFrame;
             }
         } else {
             if(this.currentFrame < this.lastFrame && !this.animationEnded) {
                 this.currentFrame += this.frameWidth;
-                console.log('frame: ' + this.currentFrame);
             } else {
                 this.animationEnded = true;
             }
@@ -275,22 +293,15 @@ class Player {
                 return Math.random() < this.stats.accuracy ? this.stats[move].strength : 0;
             }
         }
-        
-        
         return 0;
     }
     updateTurnCounter() {
-
         let moves = ['boost', 'attack2']
-
         for(let move of moves) {
-            console.log(this.stats[move].avail != 1, this.stats[move].defaultAvail != 0);
             if(this.stats[move].avail != 1 && this.stats[move].defaultAvail != 0) {
                 this.stats[move].avail += 1;
             }
         }
-
-        
     }
     receiveDamage(num) {
         this.stats.health -= num;
@@ -316,10 +327,10 @@ class Player {
 }
 let goku_moves = {
     'idle': new Move('idle'),
-    'attack1': new Move('attack1'),
-    'attack2': new Move('attack2'),
-    'special': new Move('special'),
-    'boost': new Move('boost'),
+    'attack1': new Move('Buster Cannon'),
+    'attack2': new Move('Spirit Slash'),
+    'special': new Move('Father-Son Galik Gun'),
+    'boost': new Move('Spirit Sword'),
     'defeat': new Move('defeat')
 };
 let luffy_moves = {
@@ -421,7 +432,6 @@ function startGame(e) {
         .modal-backdrop.show {
             display: none;
         }`;
-    
     let player1character = new Character(player1select.name, player1select.moves, player1select.stats, player1select.sprite, 1);
     let player2character = new Character(player2select.name, player2select.moves, player2select.stats, player2select.sprite, 2)
     let player1 = new Player(player1character);

@@ -45,7 +45,7 @@ let goku_sprite_info = {
             'frameHeight': 450,
             'yIndex': 450,
             'firstFrame': 0,
-            'lastFrame': (800 * 11),
+            'lastFrame': (800 * 9),
             'loop': false
         }
     }

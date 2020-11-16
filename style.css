@@ -294,14 +294,15 @@ div#buttons{
 }
 
 #miss{
-    -webkit-text-fill-color: rgb(255, 255, 255); /* Will override color (regardless of order) */
+    -webkit-text-fill-color: rgb(255, 0, 0); /* Will override color (regardless of order) */
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: rgb(0, 0, 0);
     width: 5rem;
     position: absolute;
     top: 100px;
-    left: 350px;
+    left: 300px;
+    display: none;
 }
 #miss h3{
-    font-size: 1.2rem;
+    font-size: 2rem;
 }
