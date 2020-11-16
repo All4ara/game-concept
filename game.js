@@ -4,10 +4,10 @@ class Game {
     constructor(player1, player2){
         this.states = ['selection', 'idle', 'preattack', 'attack', 'attacked', 'defeat', 'recovery'];
         this.currentState = this.states[1];
-        this.player1 = player1
-        this.player2 = player2
-        this.character1 = player1.character
-        this.character2 = player2.character
+        this.player1 = player1;
+        this.player2 = player2;
+        this.character1 = player1.character;
+        this.character2 = player2.character;
         this.acting;
         this.receiving;
         this.gameStateAnimations = {

@@ -140,7 +140,9 @@ div#buttons{
 .health {
     color: green;
 }
-
+#game {
+    height: 1000px;
+}
 
 #hero{
     position: absolute;
