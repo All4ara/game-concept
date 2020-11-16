@@ -256,12 +256,11 @@ div#buttons{
     width: 552px;
     height: 80px;
     margin: auto;
-background: transparent url(https://i.imgur.com/A4wyuIG.png) top no-repeat;
+    background: transparent url(https://i.imgur.com/A4wyuIG.png) top no-repeat;
 }
 
 
 .abt-body{
- 
     width: 552px;
     background: transparent url(https://i.imgur.com/EV7Fckb.png) repeat-y;
     height: 500px;
@@ -292,6 +291,17 @@ background: transparent url(https://i.imgur.com/A4wyuIG.png) top no-repeat;
 
 .abt-body h2{
     font-size: 30px;
+}
 
-    
+#miss{
+    -webkit-text-fill-color: rgb(255, 255, 255); /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: rgb(0, 0, 0);
+    width: 5rem;
+    position: absolute;
+    top: 100px;
+    left: 350px;
+}
+#miss h3{
+    font-size: 1.2rem;
 }
