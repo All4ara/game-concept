@@ -46,7 +46,7 @@ class Game {
         if(this.currentState == 'idle') {
             this.gameStateAnimations.actingPlayer = 0;
             this.gameStateAnimations.receivingPlayer = 0;
-            this.enableAllButtons();
+            this.updateButtonClickableOnTurn();
         } else if (this.currentState == 'preattack') {
             this.gameStateAnimations.actingPlayer = 0;
             this.gameStateAnimations.receivingPlayer = 0;
@@ -139,6 +139,11 @@ class Game {
         document.querySelector('#special-strength').innerText = this.actingPlayer.stats.special.strength;
     }
     updateButtonClickableOnTurn = () => {
+        if(this.actingPlayer.stats.attack1.avail != 1) {
+            document.querySelector('.atk1').classList.add('btn-disable');
+        } else {
+            document.querySelector('.atk1').classList.remove('btn-disable');
+        }
         if(this.actingPlayer.stats.special.avail != 1) {
             document.querySelector('.atk4').classList.add('btn-disable');
         } else {
